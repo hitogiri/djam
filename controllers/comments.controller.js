@@ -3,8 +3,9 @@ const Comment = require("../models/Comments.Model");
 module.exports = {
   createComment: async (req, res) => {
     try {
-      const comment = await Comment.create({
-        comment: req.body.comment
+      await Comment.create({
+        comment: req.body.comment,
+        onPost: req.params.id,
       });
       console.log("New comment added!");
       res.redirect(`/post/${req.params.id}`);
@@ -12,5 +13,5 @@ module.exports = {
     catch (err) {
       console.log('Comment could not be generated')
     }
-  }
-}
+  },
+};
